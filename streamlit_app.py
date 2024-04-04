@@ -1,36 +1,46 @@
-import altair as alt
-import numpy as np
-import pandas as pd
 import streamlit as st
+import time
+# Custom CSS for fading effect
+custom_css = """
+<style>
+    .fade-out {
+        animation: fadeOut 3s ease-in-out forwards;
+    }
 
+    @keyframes fadeOut {
+        0% {
+            opacity: 1;
+        }
+        100% {
+            opacity: 0;
+        }
+    }
+    .fade-in {
+     animation: fadeIn 1s ease-in-out forwards;
+    }
+    @keyframes fadeIn {
+    0% {
+        opacity: 0;
+    }
+    100% {
+        opacity: 1;
+    }
+</style>
 """
-# The Unique Prayer App
+placeholder = st.empty()
+# Display the fading text
+st.markdown(custom_css, unsafe_allow_html=True)
 
 
-"""
+for i in range(3):
+    if i == 0:
+        st.markdown("<p class='fade-out'>hello.</p>", unsafe_allow_html=True)
+    if i == 1:
+        st.markdown("<p class='fade-out'>would you like to...</p>", unsafe_allow_html=True)
+    if i == 2:
+       st.markdown("<p class='fade-out'>pray with me?</p>", unsafe_allow_html=True)
+    time.sleep(3)
 
-num_points = st.slider("Number of points in spiral", 1, 10000, 1100)
-num_turns = st.slider("Number of turns in spiral", 1, 300, 31)
-
-indices = np.linspace(0, 1, num_points)
-theta = 2 * np.pi * num_turns * indices
-radius = indices
-
-x = radius * np.cos(theta)
-y = radius * np.sin(theta)
-
-df = pd.DataFrame({
-    "x": x,
-    "y": y,
-    "idx": indices,
-    "rand": np.random.randn(num_points),
-})
-
-st.altair_chart(alt.Chart(df, height=700, width=700)
-    .mark_point(filled=True)
-    .encode(
-        x=alt.X("x", axis=None),
-        y=alt.Y("y", axis=None),
-        color=alt.Color("idx", legend=None, scale=alt.Scale()),
-        size=alt.Size("rand", legend=None, scale=alt.Scale(range=[1, 150])),
-    ))
+st.empty()
+st.markdown("<p class='fade-in'>The prayer app takes details you give it and generates a personal prayer for you. Everything you share here is completely private.</p>", unsafe_allow_html=True)
+st.text_input("Tell me your troubles, my child.")
