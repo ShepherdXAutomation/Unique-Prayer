@@ -4,6 +4,12 @@ import time
 st.set_page_config(page_title="Unique Prayer", page_icon=":cross:", layout="wide")
 api_key = st.secrets["CHATGPT_API_KEY"]
 client = OpenAI(api_key=api_key)
+# Check if 'run_count' is already in the session state
+# If it's not, initialize it to 0
+if 'run_count' not in st.session_state:
+    st.session_state['run_count'] = 0
+
+st.session_state['run_count'] += 1
 
 # Custom CSS for fading effect
 custom_css = """
@@ -36,15 +42,15 @@ custom_css = """
 # Display the fading text
 st.markdown(custom_css, unsafe_allow_html=True)
 
-
-for i in range(3):
-    if i == 0:
-        st.markdown("<p class='fade-out'>hello</p>", unsafe_allow_html=True)
-    if i == 1:
-        st.markdown("<p class='fade-out'>would you like to...</p>", unsafe_allow_html=True)
-    if i == 2:
-       st.markdown("<p class='fade-out'>pray with me?</p>", unsafe_allow_html=True)
-    time.sleep(3)
+if st.session_state['run_count'] == 1:
+    for i in range(3):
+        if i == 0:
+            st.markdown("<p class='fade-out'>hello</p>", unsafe_allow_html=True)
+        if i == 1:
+            st.markdown("<p class='fade-out'>would you like to...</p>", unsafe_allow_html=True)
+        if i == 2:
+            st.markdown("<p class='fade-out'>pray with me?</p>", unsafe_allow_html=True)
+        time.sleep(3)
 
 
 st.markdown("<p class='fade-in'>The prayer app takes details you give it and generates a personal prayer for you. Everything you share here is completely private.</p>", unsafe_allow_html=True)
@@ -64,7 +70,7 @@ if request:
     completion = client.chat.completions.create(
     model="gpt-4",
     messages=[
-        {"role": "system", "content": "You are a christian pastor. The prayers you provide are in first person context (example: Dear lord, help and guide through my do. I pray for wisdom and peace). You provide prayers to users based off the details you give them."},
+        {"role": "system", "content": "You are a christian pastor. The prayers you provide are in first person context (example: Dear lord, help and guide through my do. I pray for wisdom and peace). You provide prayers to users based off the details you give them. You also don't talk to the user except by giving them a prayer. You don't respond to questions."},
         {"role": "user", "content": request}
     ]
     )
