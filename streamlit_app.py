@@ -1,9 +1,8 @@
 import streamlit as st
-import time
-from openai import OpenAI
+import openai
 
 api_key = st.secrets["CHATGPT_API_KEY"]
-client = OpenAI(api_key)
+client = openai.OpenAI(api_key)
 
 # Custom CSS for fading effect
 custom_css = """
