@@ -1,7 +1,7 @@
 import streamlit as st
 from openai import OpenAI
 import time
-
+st.set_page_config(page_title="Unique Prayer", page_icon=":cross:", layout="wide")
 api_key = st.secrets["CHATGPT_API_KEY"]
 client = OpenAI(api_key=api_key)
 
@@ -39,7 +39,7 @@ st.markdown(custom_css, unsafe_allow_html=True)
 
 for i in range(3):
     if i == 0:
-        st.markdown("<p class='fade-out'>hello.</p>", unsafe_allow_html=True)
+        st.markdown("<p class='fade-out'>helloasdfasdf.</p>", unsafe_allow_html=True)
     if i == 1:
         st.markdown("<p class='fade-out'>would you like to...</p>", unsafe_allow_html=True)
     if i == 2:
