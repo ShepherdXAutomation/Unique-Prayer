@@ -2,7 +2,7 @@ import openai # TODO: The 'openai.api_' option isn't read in the client API. You
 # openai.api_ = "json_in_example.py"
 
 # Initialize the ApifyClient with your API token
-client = ApifyClient("apify_api_iF4aQzNxrGfGUhN99P8oPbJSoZuLRH2AKIZy")
+
 
 # Prepare the Actor input
 run_input = {

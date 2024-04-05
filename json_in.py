@@ -1,4 +1,4 @@
-import openai.api_key = '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'
+
 # Initialize the ApifyClient with your API token
 client = ApifyClient("apify_api_iF4aQzNxrGfGUhN99P8oPbJSoZuLRH2AKIZy")
 
