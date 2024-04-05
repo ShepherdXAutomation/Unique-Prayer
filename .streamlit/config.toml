@@ -1,4 +1,12 @@
 [browser]
 gatherUsageStats = false
 
+
 [theme]
+primaryColor = "#ffffff"  # White background
+backgroundColor = "#ffffff"  # White background
+textColor = "#333333"  # Dark gray text
+font = "sans serif"
+
+[server]
+hideStreamlitStyle = true  # Removes Streamlit app banner and info
