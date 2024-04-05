@@ -39,7 +39,7 @@ custom_css = """
 </style>
 """
 file_path = 'unique-prayer-app-hands.png'
-st.image(file_path, caption='', width=400)
+st.image(file_path, caption='', width=200)
 # Display the fading text
 st.markdown(custom_css, unsafe_allow_html=True)
 
