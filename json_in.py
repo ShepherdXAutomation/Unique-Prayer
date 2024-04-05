@@ -1,4 +1,4 @@
-import openai.api_key = ''client = ApifyClient("apify_api_iF4aQzNxrGfGUhN99P8oPbJSoZuLRH2AKIZy")
+
 
 # Prepare the Actor input
 messages = [
