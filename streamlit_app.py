@@ -4,7 +4,7 @@ import time
 import os
 st.set_page_config(page_title="Unique Prayer", page_icon=":cross:", layout="wide")
 
-api_secret_key = os.environ.get("API_SECRET_KEY")
+api_secret_key = os.environ.get("CHATGPT_API_KEY")
 st.write(api_secret_key)
 #api_key = st.secrets["CHATGPT_API_KEY"]
 client = OpenAI(api_key=api_secret_key)
