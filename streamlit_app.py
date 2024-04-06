@@ -3,6 +3,14 @@ from openai import OpenAI
 import time
 import os
 st.set_page_config(page_title="Unique Prayer", page_icon=":cross:", layout="wide")
+# Hide the top menu bar with the "hamburger" menu and Streamlit branding
+st.markdown("""
+    <style>
+        #MainMenu {visibility: hidden;}
+        footer {visibility: hidden;}
+        .stApp { top: -50px; }
+    </style>
+    """, unsafe_allow_html=True)
 
 api_secret_key = os.environ.get("CHATGPT_API_KEY")
 
