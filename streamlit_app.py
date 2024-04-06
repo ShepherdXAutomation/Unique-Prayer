@@ -70,14 +70,14 @@ def get_base64_of_bin_file(bin_file):
         data = f.read()
     return base64.b64encode(data).decode()
 
-def get_img_with_base64(src: str, width: str = "200px", alt: str = "Image"):
+def get_img_with_base64(src: str, width: str = "100px", alt: str = "Image"):
     """Generates an HTML img tag containing the image in base64 format with specified width"""
     base64_string = get_base64_of_bin_file(src)
-    return f'<img class="fade-in" src="data:image/png;base64,{base64_string}" alt="{alt}" style="width:{width};" />'
+    return f'<div style="text-align: center;"><img class="fade-in" src="data:image/png;base64,{base64_string}" alt="{alt}" style="width:{width};" />'
 
 
 # Assuming your image is named 'your-image.png' and located in the same directory as your script
-image_path = 'unique-prayer-app-hands.png'
+image_path = 'prayer_hands_transparent.png'
 
 # Inject CSS animation and the image
 st.markdown(custom_css, unsafe_allow_html=True)
@@ -102,7 +102,7 @@ if st.session_state['run_count'] == 1:
 
 welcome_placeholder.empty()
 with welcome_placeholder.container():
-    st.markdown(get_img_with_base64(image_path, "200px"), unsafe_allow_html=True)
+    st.markdown(get_img_with_base64(image_path, "80px"), unsafe_allow_html=True)
     st.markdown("<p class='fade-in'>The prayer app takes details you give it and generates a personal prayer for you. Everything you share here is completely private.</p>", unsafe_allow_html= True)
 #st.markdown("<p class='fade-in'>The prayer app takes details you give it and generates a personal prayer for you. Everything you share here is completely private.</p>", unsafe_allow_html=True)
 request = st.text_input("Tell me your troubles, my child.", key="request")
