@@ -5,7 +5,7 @@ import os
 st.set_page_config(page_title="Unique Prayer", page_icon=":cross:", layout="wide")
 
 api_secret_key = os.environ.get("CHATGPT_API_KEY")
-st.write(api_secret_key)
+
 #api_key = st.secrets["CHATGPT_API_KEY"]
 client = OpenAI(api_key=api_secret_key)
 # Check if 'run_count' is already in the session state
@@ -85,7 +85,3 @@ if request:
 
 else:
     pass
-
-
-if __name__ == '__main__':
-    st.set_option('server.enableCORS', True)
