@@ -2,6 +2,9 @@ import streamlit as st
 from openai import OpenAI
 import time
 import os
+import base64
+
+
 st.set_page_config(page_title="Unique Prayer", page_icon=":cross:", layout="wide")
 # Hide the top menu bar with the "hamburger" menu and Streamlit branding
 st.markdown("""
@@ -13,6 +16,8 @@ st.markdown("""
     """, unsafe_allow_html=True)
 
 api_secret_key = os.environ.get("CHATGPT_API_KEY")
+
+
 
 #api_key = st.secrets["CHATGPT_API_KEY"]
 client = OpenAI(api_key=api_secret_key)
@@ -48,26 +53,49 @@ custom_css = """
     100% {
         opacity: 1;
     }
+    
 </style>
 """
-file_path = 'unique-prayer-app-hands.png'
-st.image(file_path, caption='', width=200)
-# Display the fading text
+def get_base64_of_bin_file(bin_file):
+    with open(bin_file, 'rb') as f:
+        data = f.read()
+    return base64.b64encode(data).decode()
+
+def get_img_with_base64(src: str, width: str = "200px", alt: str = "Image"):
+    """Generates an HTML img tag containing the image in base64 format with specified width"""
+    base64_string = get_base64_of_bin_file(src)
+    return f'<img class="fade-in" src="data:image/png;base64,{base64_string}" alt="{alt}" style="width:{width};" />'
+
+
+# Assuming your image is named 'your-image.png' and located in the same directory as your script
+image_path = 'unique-prayer-app-hands.png'
+
+# Inject CSS animation and the image
 st.markdown(custom_css, unsafe_allow_html=True)
 
+
+
+# Display the fading text
+
+
+welcome_placeholder = st.empty()
+
 if st.session_state['run_count'] == 1:
-    for i in range(3):
-        if i == 0:
-            st.markdown("<p class='fade-out'>hello</p>", unsafe_allow_html=True)
-        if i == 1:
-            st.markdown("<p class='fade-out'>would you like to...</p>", unsafe_allow_html=True)
-        if i == 2:
-            st.markdown("<p class='fade-out'>pray with me?</p>", unsafe_allow_html=True)
-        time.sleep(3)
+    with welcome_placeholder.container():
+        for i in range(3):
+            if i == 0:
+                st.markdown("<p class='fade-out'>hello</p>", unsafe_allow_html=True)
+            if i == 1:
+                st.markdown("<p class='fade-out'>would you like to...</p>", unsafe_allow_html=True)
+            if i == 2:
+                st.markdown("<p class='fade-out'>pray with me?</p>", unsafe_allow_html=True)
+            time.sleep(3)
 
-
-st.markdown("<p class='fade-in'>The prayer app takes details you give it and generates a personal prayer for you. Everything you share here is completely private.</p>", unsafe_allow_html=True)
-
+welcome_placeholder.empty()
+with welcome_placeholder.container():
+    st.markdown(get_img_with_base64(image_path, "200px"), unsafe_allow_html=True)
+    st.markdown("<p class='fade-in'>The prayer app takes details you give it and generates a personal prayer for you. Everything you share here is completely private.</p>", unsafe_allow_html= True)
+#st.markdown("<p class='fade-in'>The prayer app takes details you give it and generates a personal prayer for you. Everything you share here is completely private.</p>", unsafe_allow_html=True)
 request = st.text_input("Tell me your troubles, my child.", key="request")
 response_placeholder = st.empty()
 # Conditional check to see if the user has entered some text and pressed Enter.
