@@ -6,6 +6,7 @@ import base64
 
 
 st.set_page_config(page_title="Unique Prayer", page_icon="favicon.ico", layout="wide")
+
 # Hide the top menu bar with the "hamburger" menu and Streamlit branding
 st.markdown("""
     <style>
