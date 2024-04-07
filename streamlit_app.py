@@ -4,17 +4,10 @@ import time
 import os
 import base64
 
-
 st.set_page_config(page_title="Unique Prayer", page_icon="favicon.ico", layout="wide")
 
 # Hide the top menu bar with the "hamburger" menu and Streamlit branding
-st.markdown("""
-    <style>
-        #MainMenu {visibility: hidden;}
-        footer {visibility: hidden;}
-        .stApp { top: -50px; }
-    </style>
-    """, unsafe_allow_html=True)
+
 hide_streamlit_style = """
             <style>
             #MainMenu {visibility: hidden;}
